@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Guess Movie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+<style>
+    body{
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 20px;
+        height: 100vh;
+        overflow: hidden;
+        background-image: linear-gradient(rgb(241,128,128) , rgb(247,45,48), rgb(242,126,197));
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .container{
+        background-color: rgb(229,232,221);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px black;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    h1{
+        
+        color: #0b0101;
+        text-shadow: 1px 1px 1px black;
+    }
+    .guess-form{
+        margin-top: 20px;
+        text-align: center;
+    }
+    .guess-form input[type="text"]{
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+    .guess-form input[type="submit"], .guess-form input[type="button"]{
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        background-color: #4CAF50;
+    }
+
+
+
+    .feedback{
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .correct{
+        color: #11a716;
+    }
+    .incorrect{
+        color: #f03f09;
+    }
+
+    .hint, .wrong-guesses, .tries-remaining{
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+
+    <div class="container">
+        <h1>GUESS THE MOVIE</h1>
+        <h2 th:text="${displayWord}"></h2>
+
+        <div class="hint">
+            <p>Actor Name : <span th:text="${actorName}">Actor Name</span></p>
+
+        </div>
+        <div class="tries-remaining">
+            <p>Tries Remaining : <span th:text="${triesRemaining}">Tries</span></p>
+
+
+        </div>
+
+        <div class="guess-form">
+            <form th:action="@{/guess-game}" method="post" id="guessForm">
+                <input type="text" name="guessedChar" id="guessedChar" placeholder="Enter a Letter" required>
+                <input type="submit" value="Submit" id="Submit">
+            </form>
+        </div>
+
+        <div class="feedback">
+            <p th:if="${isGuessCorrect}" class = "correct">Correct Guess!</p>
+            <p th:if="${isGuessCorrect == false}" class = "incorrect">Incorrect Guess!</p>
+        </div>
+
+        <div class="wrong-guesses">
+            <p>Wrong Guesses: <span th:text="${wrongGuesses}">Wrong Guesses</span></p>
+        </div>
+
+
+    </div>
+    
+    
+
+
+
+<script th:inline="javascript">
+
+        window.onload = function checkGameStatus(){
+            var numberOfTryRemaining = [[${triesRemaining}]];
+            var isGameWon = [[${gameWon}]];
+        
+        if(isGameWon){
+            alert("You Win - Movie Guesses Successfully");
+            document.getElementById('guessedChar').disabled = true;
+            document.getElementById('guessedChar').style.display = 'none';
+            document.getElementById('Submit').style.display = 'none';
+            var reloadButton = document.createElement('input');
+            reloadButton.type = 'button';
+            reloadButton.value = 'Restart Game';
+            reloadButton.onclick = function(){
+                window.location.href = '/game-home';
+            };
+            document.querySelector('.guess-form').appendChild(reloadButton);
+
+
+
+
+        }
+        else if(numberOfTryRemaining === 0){
+            alert("Game Over");
+            document.getElementById('guessedChar').disabled = true;
+            document.getElementById('guessedChar').style.display = 'none';
+            document.getElementById('Submit').style.display = 'none';
+            var reloadButton = document.createElement('input');
+            reloadButton.type = 'button';
+            reloadButton.value = 'Restart Game';
+            reloadButton.onclick = function(){
+                window.location.href = '/game-home';
+            };
+            document.querySelector('.guess-form').appendChild(reloadButton);
+
+        }
+        
+        }
+
+
+
+
+
+    </script>
+ 
+</body>
+</html>
