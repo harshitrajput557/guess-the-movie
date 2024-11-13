@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Enter the movie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<style>
+
+
+    body{
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        background-image: linear-gradient(rgb(241,128,128) , rgb(247,45,48), rgb(242,126,197));
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    @keyframes gradientBG {
+        0% {background-position: 0% 0%;}
+        50% {background-position: 100% 100%;}
+        100% {background-position: 0% 0%;}
+        
+    }
+    .container{
+        background-color: rgb(229,232,221);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px black;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    h1{
+        margin-bottom: 15px;
+        color: #0b0101;
+        text-shadow: 1px 1px 1px black;
+    }
+    label{
+        font-size: 18px;
+        color: #555;
+    }
+    input[type="text"]{
+        margin-top: 5px;
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background-color: #96dada2f;
+        box-shadow: 2px 2px 1px #96dada2f;
+    }
+    input[type="submit"]{
+        margin-top: 30px;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: black;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+
+        
+    }
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Enter The Movie!</h1>
+        <form th:action="@{/word}" method="post">
+            <label for="word"></label><br>
+            <input type="text" name="word" id="word" placeholder="Enter the movie's name" required><br>
+            <label for="actor"></label><br>
+            <input type="text" name="actor" id="actor" placeholder="Enter actor's name" required><br>
+            <input type="submit" value="Submit">
+
+
+
+        </form>
+    </div>            
+
+</body>
+</html>
